@@ -7,7 +7,7 @@
 var mongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017';
 var mongoDBName = 'examenPlanta';
-var mongoOptions = { useNewUrlParser:true};
+var mongoOptions = { useNewUrlParser: true};
 
 mongoClient.connect(url, function(err, conn ){
   if( err ) {
