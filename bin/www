@@ -4,9 +4,21 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('plantas:server');
-var http = require('http');
+var mongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://localhost:27017';
+var mongoDBName = 'examenPlanta';
+var mongoOptions = { useNewUrlParser:true};
+
+mongoClient.connect(url, function(err, conn ){
+  if( err ) {
+    console.log(err)
+    process.exit(1);
+  }
+
+  var db = conn.db(mongoDBName);
+  var app = require('../app')(db);
+  var debug = require('debug')('plantas:server');
+  var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -88,3 +100,6 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+}); //end conect
+
+
